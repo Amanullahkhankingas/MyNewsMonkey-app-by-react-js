@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Loader from './Loader';
 import NewsItem from './NewsItem'
 
 export class News extends Component {
@@ -78,30 +79,36 @@ constructor(){
 
 
 async componentDidMount(){
+  this.setState({loading:true})
   // console.log("this is mount component life cycle");
-  let url = "https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=1&pagesize=20";
+  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=1&pagesize=${this.props.pageSize}`;
   let data = await fetch(url);
   let parsedData = await data.json();
   console.log(parsedData);
-  this.setState({articles: parsedData.articles, totalResults:parsedData.totalResults})
+  this.setState({articles: parsedData.articles, totalResults:parsedData.totalResults,
+         loading:false          
+  })
 
 };
 
 handleNextChange = async ()=>{
 
 console.log("next")
-if(this.state.page +1 > Math.ceil(this.state.totalResults/20)){
+if(this.state.page +1 > Math.ceil(this.state.totalResults/this.props.pageSize)){
 
 
 }
 else{
 
-  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page +1}&pageSize=20`;
+  this.setState({loading:true})
+
+  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page +1}&pageSize=${this.props.pageSize}`;
   let data = await fetch(url);
   let parsedData = await data.json();
   
   this.setState({page:this.state.page +1,
-    articles: parsedData.articles
+    articles: parsedData.articles,
+    loading: false
   })
 
 }
@@ -113,16 +120,19 @@ else{
 };
 
 handlePreviousChange= async ()=> {
+
+  this.setState({loading:true})
   console.log("Previous");
 
-  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page -1}&pagesize=20`;
+  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page -1}&pagesize=${this.props.pageSize}`;
   let data = await fetch(url);
   let parsedData = await data.json();
   
   
 
   this.setState({page:this.state.page -1,
-    articles: parsedData.articles           
+    articles: parsedData.articles       ,
+    loading:false    
   })
   
 }
@@ -140,9 +150,11 @@ render() {
              
           <div className='container my-3 '>
              <h1>NewsMonkey - Top headlines</h1>
+
+             {this.state.loading && <Loader/>}
              <div className='row' >
        
-              {this.state.articles.map((element)=>{
+              {!this.state.loading && this.state.articles.map((element)=>{
 
 
                    return   <div className='col-md-4' key={element.url} >
@@ -156,8 +168,8 @@ render() {
          </div>
          
          <div className="container d-flex justify-content-between">
-         <button type="button" disabled={this.state.page <=1} class="btn btn-dark" onClick={this.handlePreviousChange}> &larr; previous</button>
-         <button type="button" class="btn btn-dark" onClick={this.handleNextChange}>Next &rarr;</button>
+         <button type="button" disabled={this.state.page <=1} className="btn btn-dark" onClick={this.handlePreviousChange}> &larr; previous</button>
+         <button type="button" disabled= {this.state.page + 1 >Math.ceil(this.state.totalResults/this.props.pageSize)} className="btn btn-dark" onClick={this.handleNextChange}>Next &rarr;</button>
          </div>
 
          </div>
