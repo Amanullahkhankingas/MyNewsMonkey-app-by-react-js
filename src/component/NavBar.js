@@ -1,14 +1,19 @@
 import React, { Component } from "react";
+// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 
 export class NavBar extends Component {
   render() {
     return (
-      <div>
+      <>
+            {/* <Link to="about">About</Link> */}
+
         <nav className="navbar navbar-expand-lg bg-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="/MondeyNews">
+            <Link className="navbar-brand" to="/">
               MonkeyNews
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -25,45 +30,19 @@ export class NavBar extends Component {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">
-                    Home
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">
-                business 
-                    
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">
-                entertainment 
-                  
-                  </a>
-                </li>
-               <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">general</a>
-                </li>
-               <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">health</a>
-                </li>
-               <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">science</a>
-                </li>
-               <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">sports</a>
-                </li>
-               <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/Home">technology</a>
-                </li>
-                
-               
+                <li className="nav-item"> <Link className="nav-link active"  to="/">Home</Link> </li>
+                <li className="nav-item"> <Link className="nav-link active"  to="/business"> business</Link></li>
+                <li className="nav-item"> <Link className="nav-link active"  to="/ertainment">ertainment</Link></li>
+                <li className="nav-item"> <Link className="nav-link active"  to="/general">general</Link></li>
+                <li className="nav-item"> <Link className="nav-link active"  to="/health">health</Link></li>
+                <li className="nav-item"> <Link className="nav-link active"  to="/science">science</Link></li>
+                <li className="nav-item"> <Link className="nav-link active"  to="/sports">sports</Link></li>
+                <li className="nav-item"> <Link className="nav-link active"  to="/technology">technology</Link></li>
               </ul>
             </div>
           </div>
         </nav>
-      </div>
+      </>
     );
   }
 }

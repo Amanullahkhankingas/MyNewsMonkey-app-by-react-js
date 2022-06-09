@@ -3,7 +3,7 @@ import loading from "./loader.gif";
 export class Loader extends Component {
   render() {
     return (
-      <div className="d-flex justify-item-center">
+      <div className="item-center">
           <img src={loading} alt="loadinggggg" />
         
       </div>
