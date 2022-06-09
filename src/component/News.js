@@ -2,7 +2,19 @@ import React, { Component } from 'react'
 import Loader from './Loader';
 import NewsItem from './NewsItem'
 
+import PropTypes from 'prop-types'
+
+
 export class News extends Component {
+
+  static defaultProps ={
+    country: 'in',
+    pageSize:6
+  }
+  static propTypes ={
+    country: PropTypes.string,
+    pageSize:PropTypes.number
+  }
 
 
                                 //no need local json data after fetching  API from news API site with the help of componetDidMount life sycle method
@@ -81,50 +93,53 @@ constructor(){
 async componentDidMount(){
   this.setState({loading:true})
   // console.log("this is mount component life cycle");
-  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=1&pagesize=${this.props.pageSize}`;
+  let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=1&pagesize=${this.props.pageSize}`;
+  // let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=1&pagesize=${this.props.pageSize}`;
   let data = await fetch(url);
   let parsedData = await data.json();
   console.log(parsedData);
   this.setState({articles: parsedData.articles, totalResults:parsedData.totalResults,
-         loading:false          
+    loading:false          
   })
-
+  
 };
 
 handleNextChange = async ()=>{
-
-console.log("next")
-if(this.state.page +1 > Math.ceil(this.state.totalResults/this.props.pageSize)){
-
-
-}
-else{
-
-  this.setState({loading:true})
-
-  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page +1}&pageSize=${this.props.pageSize}`;
-  let data = await fetch(url);
-  let parsedData = await data.json();
   
-  this.setState({page:this.state.page +1,
-    articles: parsedData.articles,
-    loading: false
-  })
-
-}
-
-
-
-
+  console.log("next")
+  if(this.state.page +1 > Math.ceil(this.state.totalResults/this.props.pageSize)){
+    
+    
+  }
+  else{
+    
+    this.setState({loading:true})
+    
+    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=1&pagesize=${this.props.pageSize}`;
+    // let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page +1}&pageSize=${this.props.pageSize}`;
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    
+    this.setState({page:this.state.page +1,
+      articles: parsedData.articles,
+      loading: false
+    })
+    
+  }
+  
+  
+  
+  
   
 };
 
 handlePreviousChange= async ()=> {
-
+  
   this.setState({loading:true})
   console.log("Previous");
-
-  let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page -1}&pagesize=${this.props.pageSize}`;
+  
+  let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=1&pagesize=${this.props.pageSize}`;
+  // let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=b295165af8364ddfa6f65a88b1bedf16&page=${this.state.page -1}&pagesize=${this.props.pageSize}`;
   let data = await fetch(url);
   let parsedData = await data.json();
   
@@ -148,13 +163,13 @@ render() {
               
 
              
-          <div className='container my-3 '>
-             <h1>NewsMonkey - Top headlines</h1>
+          <div className='container '>
+             <h1 className='text-center'>NewsMonkey - Top headlines</h1>
 
              {this.state.loading && <Loader/>}
              <div className='row' >
        
-              {!this.state.loading && this.state.articles.map((element)=>{
+              {!this.state.loading && this.state.articles.map((element)=>{  
 
 
                    return   <div className='col-md-4' key={element.url} >
