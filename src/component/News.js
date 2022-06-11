@@ -67,11 +67,18 @@ export class News extends Component {
 
 
 
+  capitalize = function (strSentence) {
+    return strSentence.toLowerCase().replace(/\b[a-z]/g, convertToUpper);
+
+    function convertToUpper() {
+        return arguments[0].toUpperCase();
+    }
+}
 
 
-constructor(){
+constructor(props){
   
-  super();
+  super(props);
   console.log("this is the constructure")
   this.state = {
     // articles: this.articles,
@@ -79,6 +86,9 @@ constructor(){
     loading :false,
     page:1,
   };
+
+  document.title =` NewsMonkey - ${this.capitalize(this.props.category)} `
+
   // console.log(this.state.page)
 }
 
@@ -193,7 +203,7 @@ render() {
 
              
           <div className='container '>
-             <h1 className='text-center'>NewsMonkey - Top headlines</h1>
+             <h1 className='text-center'>NewsMonkey - {this.capitalize(this.props.category)} Top headlines</h1>
 
              {this.state.loading && <Loader/>}
              <div className='row' >
