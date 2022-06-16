@@ -23,9 +23,16 @@ export class NewsItem extends Component {
 
         <div className='container  ' style={{margin:"30px 0px"}}> 
           <div className="card" >
-            <span className='position-absolute top-0 translate-middle badge rounded-pill bg-danger' style={{left:'90%' ,zIndex:1}}>
+
+            <div style={{display:'flex', flexDirection:'flex-end', position:'absolute', right:'0' }}>
+            {/* <span className='position-absolute top-0 translate-middle badge rounded-pill bg-danger' style={{left:'90%' ,zIndex:1}}> */}
+               
+            <span className=' badge rounded-pill bg-danger' style={{left:'90%' ,zIndex:1}}>
               {source}
               </span>
+
+              {/* </span> */}
+            </div>
 
             <img src={ImageUrl} className="card-img-top" alt="..."/>
             <div className="card-body">
