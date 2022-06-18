@@ -1,14 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import loading from "./loader.gif";
-export class Loader extends Component {
-  render() {
+const Loader =()=> {
+  
     return (
       <div className="text-center my-3">
           <img src={loading} alt="loadinggggg" />
         
       </div>
     );
-  }
+  
 }
 
 export default Loader;

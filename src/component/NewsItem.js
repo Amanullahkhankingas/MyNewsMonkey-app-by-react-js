@@ -1,21 +1,10 @@
 // import { getByTitle } from '@testing-library/react'
-import React, { Component } from 'react'
+import React from 'react'
 
-export class NewsItem extends Component {
-
-
-  
-  
-  
+const NewsItem =(props)=> {
 
 
-
-  render() {
-        
-  
-
-
-    let {title , description ,ImageUrl ,newsUrl ,source,date, author } = this.props
+    const {title , description ,ImageUrl ,newsUrl ,source,date, author } = props;
     return (
       <div>
         {/* NewsItem is here */}
@@ -46,7 +35,7 @@ export class NewsItem extends Component {
 
       </div>
     )
-  }
+  
 }
 
 export default NewsItem

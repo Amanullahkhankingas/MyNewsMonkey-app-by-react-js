@@ -30,7 +30,7 @@
 // class base component is start from here 
 
 
-import React, { Component } from 'react'
+import React from 'react'
 import NavBar from './component/NavBar'
 import News from './component/News'
 
@@ -64,20 +64,25 @@ import {
 
 
 
-export default class App extends Component {
+const App =()=> {
   // clss = "complete"
   // pageSize = 3
-  // apiKey =  process.env.REACT_APP_NEWS_API
-  apiKey =  "777dc32111e741b49fa3372cbb479f28"
-  
+  const apiKey =process.env.REACT_APP_NEWS_API
+
+  // apiKey =  "777dc32111e741b49fa3372cbb479f28"
+  // apiKey = "364989c74e6449b5bc9f3867bf1b1015" 
+  // const apiKey = 'b295165af8364ddfa6f65a88b1bedf16'   
   // state ={
   //   progress:0
   // }
   // setProgress=(progress)=>{
   //   this.setState({progress:progress})
   // }
+   
+  //  it is for top laoding bar and i cannot usethem because is damage all my app apfter isntalling the top loading bar packge  
+  // const[progress, setProgress] = useState(0);
 
-  render() {
+  
     return (
       <>
             
@@ -121,23 +126,42 @@ export default class App extends Component {
             progress={this.state.progress}
             /> */}
 
-           <Routes>
+
+      {/*  it is for top laoding bar and i cannot usethem because is damage all my app apfter isntalling the top loading bar packge   */}
+              {/* <Routes>
+            
+              
+              <Route  path='/' element={ <News  setProgress={setProgress}  apiKey={apiKey}  key={"general"} pageSize={6}  category={"general"} country={"us"} />   } />
+               <Route  path='business' element={ <News  setProgress={setProgress}  apiKey={apiKey}  key={"business"} pageSize={6}  category={"business"} country={"us"} />   } />
+              <Route  path='/entertainment' element={ <News  setProgress={setProgress}  apiKey={apiKey}  key={"entertainment"} pageSize={6}  category={"entertainment"} country={"us"} />   } />
+              <Route  path='/health' element={ <News  setProgress={setProgress}  apiKey={apiKey}  key={"health"} pageSize={6}  category={"health"} country={"us"} />   } />
+              <Route  path='/science' element={ <News  setProgress={setProgress}  apiKey={apiKey}  key={"science"} pageSize={6}  category={"science"} country={"us"} />   } />
+              <Route  path='/sports' element={ <News  setProgress={setProgress}  apiKey={apiKey}  key={"sports"} pageSize={6}  category={"sports"} country={"us"} />   } />
+              <Route  path='/technology' element={ <News  setProgress={setProgress}  apiKey={apiKey}  key={"technology"} pageSize={6}  category={"technology"} country={"us"} />   } />
+
+              </Routes> */}
+
+              <Routes>
             
               {/* <Route  path='/' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey} key={"general"} pageSize={6}  category={"general"} country={"us"} />   } /> */}
-              <Route  path='/' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey}  key={"general"} pageSize={6}  category={"general"} country={"us"} />   } />
-               <Route  path='business' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey}  key={"business"} pageSize={6}  category={"business"} country={"us"} />   } />
-              <Route  path='/entertainment' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey}  key={"entertainment"} pageSize={6}  category={"entertainment"} country={"us"} />   } />
-              <Route  path='/health' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey}  key={"health"} pageSize={6}  category={"health"} country={"us"} />   } />
-              <Route  path='/science' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey}  key={"science"} pageSize={6}  category={"science"} country={"us"} />   } />
-              <Route  path='/sports' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey}  key={"sports"} pageSize={6}  category={"sports"} country={"us"} />   } />
-              <Route  path='/technology' element={ <News  setProgress={this.setProgress}  apiKey={this.apiKey}  key={"technology"} pageSize={6}  category={"technology"} country={"us"} />   } />
+              <Route  path='/' element={ <News   apiKey={apiKey}  key={"general"} pageSize={6}  category={"general"} country={"us"} />   } />
+               <Route  path='business' element={ <News   apiKey={apiKey}  key={"business"} pageSize={6}  category={"business"} country={"us"} />   } />
+              <Route  path='/entertainment' element={ <News   apiKey={apiKey}  key={"entertainment"} pageSize={6}  category={"entertainment"} country={"us"} />   } />
+              <Route  path='/health' element={ <News   apiKey={apiKey}  key={"health"} pageSize={6}  category={"health"} country={"us"} />   } />
+              <Route  path='/science' element={ <News   apiKey={apiKey}  key={"science"} pageSize={6}  category={"science"} country={"us"} />   } />
+              <Route  path='/sports' element={ <News   apiKey={apiKey}  key={"sports"} pageSize={6}  category={"sports"} country={"us"} />   } />
+              <Route  path='/technology' element={ <News   apiKey={apiKey}  key={"technology"} pageSize={6}  category={"technology"} country={"us"} />   } />
 
               </Routes>
              
           
             </BrowserRouter>  
 
+            {/* REACT_APP_NEWS_API = "777dc32111e741b49fa3372cbb479f28" */}
+
       </>
     )
-  }
+  
 }
+
+export default App;
